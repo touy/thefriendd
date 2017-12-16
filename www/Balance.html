@@ -1,0 +1,272 @@
+<ons-page id="mypage1"
+          ng-controller="BalanceController"
+          ng-init="c=1;r=0;t=0;">
+  <ons-toolbar class="barColor">
+    <div class="left">
+   
+      <ons-toolbar-button ng-click="app.load('main.html')">
+          <ons-icon icon="ion-arrow-left-b" style="color:white"></ons-icon>
+        </ons-toolbar-button> 
+    </div>
+    <div class="center" style="color:white">{{LangObject.Menu.Balance}}</div>
+  </ons-toolbar>
+  <ons-list-item ng-class="userinit.mainbalance&gt;0 ? 'area':''"
+                 ng-click="dialog.show();"
+                 tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Balance}}</div>
+    <div class="right"
+         id="fontclolor">
+      <b>{{userinit.mainbalance | number}}</b>
+    </div>
+  </ons-list-item>
+  <ons-list-item tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Bonus}}</div>
+    <div class="right"
+         id="fontclolor">
+      <b ng-class="">{{userinit.balancevalue | number}}</b>
+    </div>
+  </ons-list-item>
+  <ons-list-item ng-click="Trasfter('offeredbonus',userinit.offeredbonus)"
+                 tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Offerbonus}}</div>
+    <div class="right"
+         id="fontclolor">
+      <b ng-class="userinit.offeredbonus==0 ? 'area':''">{{userinit.offeredbonus | number}}</b>
+    </div>
+  </ons-list-item>
+  <ons-list-item tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.TopupBonus}}</div>
+    <div class="right"
+         id="fontclolor">
+      <b ng-class="userinit.bonustopupbalance&gt;0 ? 'area':''">{{userinit.bonustopupbalance | number}}</b>
+    </div>
+  </ons-list-item>
+  <ons-list-item tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Topup}}</div>
+    <div class="right"
+         id="fontclolor">{{userinit.topupbalance | number}}</div>
+  </ons-list-item>
+  <ons-list-item tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Register}}</div>
+    <div class="right"
+         id="fontclolor">
+      <b ng-class="userinit.firstbalance&gt;0 ? 'area':''">{{userinit.firstbalance | number}}</b>
+    </div>
+  </ons-list-item>
+  <ons-list-item tappable="">
+    <div class="center"
+         id="fontclolor">{{LangObject.TB_Dashboard.Product}}</div>
+    <div class="right"
+         id="fontclolor">{{userinit.maxproduct | number}}</div>
+  </ons-list-item>
+  <ons-dialog var="dialog">
+    <ons-row style="margin-top:20px;">
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/cashing.png"
+             width="50px" />
+        <br />
+        <ons-radio checked="checked"
+                   input-id="radio-1"
+                   name="group"
+                   ng-click="c=1;r=0;t=0;"></ons-radio>
+          <p style="color:black">{{LangObject.Radio.Cashing}}</p>
+      </ons-col>
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/request.png"
+             width="50px" />
+        <br />
+        <ons-radio input-id="radio-2"
+                   name="group"
+                   ng-click="c=0;r=1;t=0;"></ons-radio>
+                   <p style="color:black">{{LangObject.Radio.Request}}</p>
+      </ons-col>
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/Transfer.png"
+             width="50px" />
+        <br />
+        <ons-radio input-id="radio-3"
+                   name="group"
+                   ng-click="c=0;r=0;t=1;"></ons-radio>
+                   <p style="color:black">{{LangObject.Radio.Transfer}}</p>
+      </ons-col>
+    </ons-row>
+    <!-- Cashing -->
+    <ons-row ng-if="c==1">
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Name"
+                     placeholder="{{LangObject.TB_Transfer.Name}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Lastname"
+                     placeholder="{{LangObject.TB_Transfer.LastName}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Username"
+                     placeholder="{{LangObject.TB_Transfer.UserName}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Tel"
+                     placeholder="{{LangObject.TB_Transfer.Tel}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Email"
+                     placeholder="{{LangObject.TB_Transfer.Email}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-bottom:20px;margin-top:20px;">
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="dialog.hide()"
+                      style="background-color:red">{{LangObject.Button.Cancel}}</ons-button>
+        </ons-col>
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="Transfer()">{{LangObject.Button.Transfer}}</ons-button>
+        </ons-col>
+      </ons-row>
+    </ons-row>
+    <!-- Cashing -->
+    <!-- Request to Balance -->
+    <ons-row ng-if="r==1">
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Name"
+                     placeholder="{{LangObject.TB_Transfer.Name}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Lastname"
+                     placeholder="{{LangObject.TB_Transfer.LastName}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Username"
+                     placeholder="{{LangObject.TB_Transfer.UserName}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Tel"
+                     placeholder="{{LangObject.TB_Transfer.Tel}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Email"
+                     placeholder="{{LangObject.TB_Transfer.Email}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+            <input type="file" id="uploadImage" accept="image/*" onchange="PreviewImage();">
+          <br><img id="uploadPreview"  id="output"   height=100 width=100 />
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-bottom:20px;margin-top:20px;">
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="dialog.hide()"
+                      style="background-color:red">{{LangObject.Button.Cancel}}</ons-button>
+        </ons-col>
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="Transfer()">{{LangObject.Button.Transfer}}</ons-button>
+        </ons-col>
+      </ons-row>
+   
+    </ons-row>
+    <!-- Request to Balance -->
+    <!-- Transfer-->
+    <ons-row ng-if="t==1">
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Name"
+                     placeholder="{{LangObject.TB_Transfer.Amount}}"
+                     type="number"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-top:20px;">
+        <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+          <ons-input class="text-input--material"
+                     float=""
+                     modifier="material"
+                     ng-model="User.Lastname"
+                     placeholder="{{LangObject.TB_Transfer.UserName}}"
+                     type="text"></ons-input>
+        </ons-col>
+      </ons-row>
+      <ons-row style="margin-bottom:20px;margin-top:20px;">
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="dialog.hide()"
+                      style="background-color:red">{{LangObject.Button.Cancel}}</ons-button>
+        </ons-col>
+        <ons-col style="text-align: center;">
+          <ons-button ng-click="Transfer()">{{LangObject.Button.Transfer}}</ons-button>
+        </ons-col>
+      </ons-row>
+    </ons-row>
+    <!-- Transfer-->
+  </ons-dialog>
+</ons-page>

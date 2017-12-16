@@ -1,0 +1,69 @@
+<ons-page id="mypage"
+          ng-controller="MainController">
+  <div id="divglass">
+    <ons-toolbar class="barColor">
+      <div class="left">
+        <ons-toolbar-button ng-click="app.toggle()">
+          <ons-icon icon="md-menu"
+                    style="color:white"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center"
+           style="color:white">{{LangObject.Menu.System}}</div>
+    </ons-toolbar>
+    <ons-row style="margin-top:15%">
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('Balance.html')"
+             src="img/009-wallet.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Balance}}</p>
+      </ons-col>
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('profile.html')"
+             src="img/008-boy.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Userprofile}}</p>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top:15%">
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('ClientTree.html')"
+             src="img/003-diagram.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Clinettree}}</p>
+      </ons-col>
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('changepassword.html')"
+             src="img/004-key.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Mypassword}}</p>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top:15%">
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('Register.html')"
+             src="img/005-newspaper.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Report}}</p>
+      </ons-col>
+      <ons-col style="text-align:center">
+        <img alt=""
+             height="90px"
+             ng-click="app.load('Topup.html')"
+             src="img/001-sim-card.png"
+             width="90px" />
+        <p>{{LangObject.Menu.Topup}}</p>
+      </ons-col>
+    </ons-row>
+  </div>
+</ons-page>

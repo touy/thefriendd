@@ -1,0 +1,20 @@
+<ons-navigator animation="slide"
+               var="navi">
+  <ons-page id="mypage"
+            ng-controller="LogoutController">
+    <ons-toolbar class="barColor">
+      <div class="left">
+        <ons-toolbar-button ng-click="app.toggle()">
+          <ons-icon icon="md-menu"
+                    style="color:white"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center"
+           style="color:white">{{LangObject.Menu.Logout_menu}}</div>
+    </ons-toolbar>
+    <div style="text-align: center; margin-top: 40%;margin-left: 20%;margin-right: 20%;">
+      <ons-button ng-click="Logoff()"
+                  style="width:150px">{{LangObject.Button.Logout}}</ons-button>
+    </div>
+  </ons-page>
+</ons-navigator>

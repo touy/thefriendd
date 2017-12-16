@@ -1,0 +1,27 @@
+<ons-navigator animation="slide" var="navi">
+    <ons-page ng-controller="LoginController">
+
+        <img src="img/background.jpg" alt="TheFriendd" style="width:100%;">
+        <div style="text-align: center; margin-top: 100px">
+            <p style="margin-top:3%;padding-left:10%;padding-right:10%">
+
+                <label for="username">{{LangObject.TB_Product.productname}}</label>
+                <input id="texbox" type="text" ng-model="User.username" placeholder="{{LangObject.Usernametxt}}">
+
+                <label for="password">{{LangObject.TB_Product.price}}</label>
+                <input id="password" type="text" ng-model="User.password" placeholder="{{LangObject.Passwordtxt}}">
+
+
+
+                <p style="margin-top: 50px;">
+                    <ons-button style="width:150px" ng-click="Logins(User)">{{LangObject.LoginButton}}</ons-button>
+                </p>
+                <br/>
+
+        </div>
+        <br/>
+        <ons-progress-bar ng-show="Loading=='true'" style="margin-left:10%;margin-right:10%;" indeterminate></ons-progress-bar>
+
+
+    </ons-page>
+</ons-navigator>

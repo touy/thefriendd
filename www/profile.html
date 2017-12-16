@@ -1,0 +1,245 @@
+<ons-page id="mypage1"
+          ng-controller="ProfileController" ng-init="User.gender='F';">
+  <ons-toolbar class="barColor">
+    <div class="left">
+  
+        <ons-toolbar-button ng-click="app.load('main.html')">
+            <ons-icon icon="ion-arrow-left-b" style="color:white"></ons-icon>
+          </ons-toolbar-button>    
+     
+    </div>
+    <div class="center" style="color:white">{{LangObject.Menu.Userprofile}}</div>
+  </ons-toolbar>
+  <ons-card>
+    <ons-list-header>{{LangObject.TB_Profile.TotalMembers}}</ons-list-header>
+    <ons-list>
+      <ons-list-item>
+        <div class="left"><img src="img/Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Copper}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Close_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Silver}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Glod_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Gold}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">{{LangObject.TB_Profile.TotalMember}}</div>
+        <div class="right">{{2500000 | number}}</div>
+      </ons-list-item>
+    </ons-list>
+  </ons-card>
+  <ons-card>
+    <ons-list-header>{{LangObject.TB_Profile.MemberLeft}}</ons-list-header>
+    <ons-list>
+      <ons-list-item>
+        <div class="left"><img src="img/Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Copper}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Close_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Silver}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Glod_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Gold}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">{{LangObject.TB_Profile.TotalMember}}</div>
+        <div class="right">{{2500000 | number}}</div>
+      </ons-list-item>
+    </ons-list>
+  </ons-card>
+  <ons-card>
+    <ons-list-header>{{LangObject.TB_Profile.MemberRight}}</ons-list-header>
+    <ons-list>
+      <ons-list-item>
+        <div class="left"><img src="img/Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Copper}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Close_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Silver}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="left"><img src="img/Glod_Friend.png" width="50px" height="50px"></div>
+        <div class="center">{{LangObject.TB_Profile.Gold}}</div>
+        <div class="right">{{250000 | number}}</div>
+      </ons-list-item>
+      <ons-list-item>
+        <div class="center">{{LangObject.TB_Profile.TotalMember}}</div>
+        <div class="right">{{2500000 | number}}</div>
+      </ons-list-item>
+    </ons-list>
+  </ons-card>
+  <ons-card >
+      
+          <ons-col style="text-align:center">
+              <ons-button ng-show="A=='0'" ng-click="A='1'" modifier="large--quiet">{{LangObject.TB_ChangeProfile.Action}}</ons-button>
+              <ons-button ng-show="A=='1'" ng-click="A='0';cancle();" modifier="large--quiet">{{LangObject.TB_ChangeProfile.Cancel}}</ons-button>
+            </ons-col>
+    
+        </ons-row>
+   
+    
+    <div   ng-disabled="A=='0'" style="text-align: center; margin-top: 10px">
+    <ons-row style="margin-top:2%;">
+      <ons-col>
+      <div class="image-upload">
+          <label for="file-input">
+              <img id="blah" class="circular--portrait" src="{{UserImage}}"/>
+          </label>
+        <input id="file-input"  type = "file" file-model = "userFile"/>
+      </div>
+        <ons-button modifier="large--quiet" id="b" ng-disabled="up=='true'"  ng-click = "uploadFile()">{{LangObject.TB_ChangeProfile.upload}}</ons-button>
+      </ons-col>
+      </ons-row>
+
+      <p style="margin-top:5%;">
+
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.username"
+                   placeholder="{{LangObject.TB_ChangeProfile.username}}"
+                   type="text"></ons-input>
+      </p>
+      <p  style="margin-top:10%;">
+       
+
+
+
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.phone1"
+                   placeholder="{{LangObject.TB_ChangeProfile.phone1}}"
+                   type="number"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+       
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.phone2"
+                   placeholder="{{LangObject.TB_ChangeProfile.phone2}}"
+                   type="number"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.fullname"
+                   placeholder="{{LangObject.TB_ChangeProfile.fullname}}"
+                   type="text"></ons-input>
+      </p>
+     
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.address"
+                   placeholder="{{LangObject.TB_ChangeProfile.address}}"
+                   type="text"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.bankaccount"
+                   placeholder="{{LangObject.TB_ChangeProfile.bankaccount}}"
+                   type="text"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.bank"
+                   placeholder="{{LangObject.TB_ChangeProfile.bank}}"
+                   type="text"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.email"
+                   placeholder="{{LangObject.TB_ChangeProfile.email}}"
+                   type="email"></ons-input>
+      </p>
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.idcard"
+                   placeholder="{{LangObject.TB_ChangeProfile.idcard}}"
+                   type="text"></ons-input>
+      </p>
+
+    
+     
+          <ons-input id="#change" 
+                     float=""
+                     ng-disabled="A=='0'"
+                     modifier="material"
+                     ng-model="User.birthdate"
+                     type="date"></ons-input>
+    
+      <p style="margin-top:10%;"></p>
+          <ons-row>
+           
+            <ons-col style="text-align: center;">
+              <img alt=""
+                  height="40px"
+                  src="img/man.png"
+                  width="40px" />
+              <br />
+              <ons-radio input-id="radio-2" checked="checked"
+                        name="group"
+                        ng-disabled="A=='0'"
+                        ng-click="User.gender='M'"></ons-radio>
+            </ons-col>
+            <ons-col style="text-align: center;">
+              <img alt=""
+                  height="40px"
+                  src="img/woman.png"
+                  width="40px" />
+              <br />
+              <ons-radio input-id="radio-3"
+                        name="group"
+                        ng-disabled="A=='0'"
+                        ng-click="User.gender='F'"></ons-radio>
+            </ons-col>
+          </ons-row>
+        </p>
+      
+    
+        
+        
+     
+    
+      <p style="margin-top: 50px;">
+        <ons-button ng-click="ChangeUserData(User)"      ng-disabled="A=='0'"
+                    style="width:150px">{{LangObject.Button.Save}}</ons-button>
+      </p>
+    </div>
+  </ons-card>
+</ons-page>

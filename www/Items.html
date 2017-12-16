@@ -1,0 +1,41 @@
+<ons-page id="mypage3" ng-controller="ItemsController">
+    <!--
+      <ons-toolbar id="toolbarOver">
+        <div class="left">
+          <ons-toolbar-button ng-click="app.load('home.html')">
+            <ons-icon icon="ion-arrow-left-b"
+                      style="color:white"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center"
+             style="color:white">{{LangObject.Menu.ProductDetail}}</div>
+      </ons-toolbar>
+    -->
+
+
+
+    <ons-carousel var="carousel" ons-postchange="console.log('Changed to ' + $event.activeIndex)" fullscreen swipeable auto-scroll overscrollable>
+
+        <ons-carousel-item ng-repeat="i in items" style="background-color: #1f1f1f;">
+            <ons-icon ng-click="app.load('Detail.html')" icon="ion-close-round" id="CloseItems"></ons-icon>
+            <img src="{{i.image}}" style="width:100%;" />
+        </ons-carousel-item>
+
+
+
+        <!--
+        <ons-carousel-item style="background-color: #1f1f1f;">
+            <ons-icon ng-click="app.load('Detail.html')" icon="ion-close-round" id="CloseItems"></ons-icon>
+            <img src="{{items[1]}}" style="width:100%;" />
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: #1f1f1f;">
+            <ons-icon ng-click="app.load('Detail.html')" icon="ion-close-round" id="CloseItems"></ons-icon>
+            <img src="{{items[2]}}" style="width:100%;" />
+        </ons-carousel-item>
+    -->
+
+    </ons-carousel>
+
+
+
+</ons-page>

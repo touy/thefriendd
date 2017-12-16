@@ -1,0 +1,147 @@
+
+    <ons-page id="mypage" ng-controller="TopupController"  ng-init="P='X';brightness1=0;brightness2=0;brightness3=0;brightness4=0;brightness5=0;">
+    
+                 <ons-toolbar class="barColor">
+                        <div class="left">
+                     
+                        <ons-toolbar-button ng-click="app.load('main.html')">
+                            <ons-icon icon="ion-arrow-left-b" style="color:white"></ons-icon>
+                          </ons-toolbar-button>   
+                        </div>
+                        <div class="center" style="color:white">
+                          {{LangObject.Menu.Topup}}
+                        </div>       
+        
+                 </ons-toolbar>
+    
+    
+                <ons-card ng-click="dialog.show();P='LTC';images='img/laotellogo.png';">
+                    <div class="title">
+                      LAO TELECOM
+                    </div>
+                    <img src="img/laotellogo.png"  alt="Onsen UI" style="width:60px;hieght:100px">      
+                </ons-card>
+                
+                 <ons-card ng-click="dialog.show();P='BTL';images='img/BeeLine_logo.png';">
+                    <div class="title">
+                       BELLINE TELECOM
+                    </div>
+                    <img src="img/BeeLine_logo.png" alt="Onsen UI" style="width:60px;hieght:100px">      
+                </ons-card>
+                
+                
+                 <ons-card ng-click="dialog.show();P='ETL';images='img/etl.png';">
+                    <div class="title">
+                      ETL TELECOM 
+                    </div>
+                    <img src="img/etl.png" alt="Onsen UI" style="width:60px;hieght:100px">      
+                </ons-card>
+                
+                 <ons-card ng-click="dialog.show();P='UTL';images='img/unitel.png';">
+                    <div class="title">
+                       UNITEL TELECOM
+                    </div>
+                    <img src="img/unitel.png" alt="Onsen UI" style="width:60px;hieght:100px">      
+                </ons-card>
+                
+                
+                <ons-list>
+ 
+     
+                <ons-dialog var="dialog">
+                            
+                             <ons-row style="margin-top:20px;"> 
+                                  <ons-col style="text-align: center;">
+                                         <img src="{{images}}"  alt="Onsen UI" style="width:100px;hieght:150px">   
+                                 </ons-col>
+                            </ons-row>
+                            
+                            <ons-row style="margin-top:20px;">                                   
+                            
+                                  <ons-col width="50px" style="text-align: center; line-height: 30px;margin-left:5px">
+                                    5,000
+                                  </ons-col>
+                                  <ons-col>
+                                    <ons-range style="width: 95%;" ng-model="brightness1"></ons-range>
+                                  </ons-col>
+                                  <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                   {{brightness1}}
+                                  </ons-col>
+                            </ons-row>
+                            
+                             <ons-row style="margin-top:20px;">                                   
+                            
+                                  <ons-col width="50px" style="text-align: center; line-height: 30px;margin-left:5px">
+                                    10,000
+                                  </ons-col>
+                                  <ons-col>
+                                    <ons-range style="width: 95%;" ng-model="brightness2"></ons-range>
+                                  </ons-col>
+                                   <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                   {{brightness2}}
+                                  </ons-col>
+                            </ons-row>
+                            
+                            <ons-row style="margin-top:20px;">                                   
+                            
+                                 <ons-col width="50px" style="text-align: center; line-height: 30px;margin-left:5px">
+                                    25,000
+                                  </ons-col>
+                                  <ons-col>
+                                    <ons-range style="width: 95%;" ng-model="brightness3"></ons-range>
+                                  </ons-col>
+                                   <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                   {{brightness3}}
+                                  </ons-col>
+                            </ons-row>
+                            
+                            <ons-row style="margin-top:20px;">                                   
+                            
+                              <ons-col width="50px" style="text-align: center; line-height: 30px;margin-left:5px">
+                                    50,000
+                                  </ons-col>
+                                  <ons-col>
+                                    <ons-range style="width: 95%;" ng-model="brightness4"></ons-range>
+                                  </ons-col>
+                                   <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                   {{brightness4}}
+                                  </ons-col>
+                            </ons-row>
+                            
+                            <ons-row style="margin-top:20px;">                                   
+                            
+                                   <ons-col width="65px" style="text-align: center; line-height: 30px;margin-left:5px">
+                                    100,000
+                                  </ons-col>
+                                  <ons-col>
+                                    <ons-range style="width: 95%;" ng-model="brightness5"></ons-range>
+                                  </ons-col>
+                                   <ons-col width="40px" style="text-align: center; line-height: 31px;">
+                                   {{brightness5}}
+                                  </ons-col>
+                            </ons-row>
+                            
+                            
+                            
+                            <ons-row>
+                                    <ons-col style="text-align: center;">
+                                        <p style="color:black;font-size:20px;">{{(brightness1 * 5000) + (brightness2 * 10000) +(brightness3 * 25000) +(brightness4 * 50000) + (brightness5 * 100000) | number}} KIP</p>
+                                    </ons-col>
+                            </ons-row>
+                            
+                            <ons-row style="margin-bottom:20px;">
+                                    <ons-col style="text-align: center;">
+                                    <ons-button style="background-color:red" ng-click="dialog.hide()">{{LangObject.Button.Cancel}}</ons-button>
+                                    </ons-col>
+                                    
+                                    <ons-col style="text-align: center;">
+                                    <ons-button ng-disabled="!((brightness1 * 5000)+(brightness2 * 10000)+(brightness3 * 25000)+(brightness4 * 50000)+(brightness5 * 100000)>=5000) || !((brightness1 * 5000)+(brightness2 * 10000)+(brightness3 * 25000)+(brightness4 * 50000)+(brightness5 * 100000)<=500000) " ng-click="Topup()">{{LangObject.Button.TopUp}}</ons-button>
+                                    </ons-col>
+                            </ons-row>
+                    
+                      
+                </ons-dialog>
+      
+    </ons-page>
+    
+               
