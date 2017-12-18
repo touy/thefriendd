@@ -613,119 +613,96 @@ ons.bootstrap()
         }
         return maxlevel;
     }
-
+    function getIndexes(n, level) {
+        var arr = [];
+        for (var index = 1; index < level; index++) {
+            if (index > 1)
+                n = n * 2 + 1;
+            for (var i = 0; i < Math.pow(2, index); i++) {
+                arr.push(2 * n + 1 + i);
+         }
+        }
+        return arr;
+    }
     function fillUpMembers(username, level, b) {
         var u = getUserBinaryByUsername(username, b);
-        //var b1 = b;            
         if (!b.length) {
             return [];
         }
-        // fill up    
-        //console.log("before" + b.length)
-        if (b.length < (2 * Math.pow(2, maxrange)) - 1) {
-            var max = findMaxLevel(u.level, b);
-            //var n=max-u.level;
-            //console.log(maxrange + "maxrange / level:" + u.level);
-            //b=[];
-            //return;
-            for (var index = 0; index < maxrange; index++) {
-                u1 = getBinaryDataByMemberLevel(u.level + index, b);
-                //console.log("u1."+u1.length);
-                //return;
-                if (u1.length) {
-                    needmore = Math.pow(2, index) - u1.length;
-                    // console.log("index: "+index);
-                    // console.log(b.length+" b.length,needmore:" + needmore + " 2^n" + Math.pow(2, index));
-                    if (needmore > 0 && needmore < Math.pow(2, index))
-                        for (var i = 0; i < needmore; i++) {
-                            console.log("i:" + i);
-                            username = makeid(6, 1);
+        var indexes = getIndexes(u.index, maxrange);
+        for (let index = 0; index < indexes.length; index++) {
+            const element = indexes[index];
+            var exist = false;
+            for (let index = 0; index < b.length; index++) {
+                const e = b[index];
+                if (element == e.index) {
+                    exist = true;
+                }
+            }
+            if (!exist) {
+                var pindex = (element - ((element % 2) ? 1 : 2)) / 2;
+                if (pindex >= u.index) {
+                    var p = null;
+                    for (let index = 0; index < b.length; index++) {
+                        const e = b[index];
+                        if (pindex == e.index) {
+                            p = e;
+                        }
+                    }
+                    if (p) {
+                        var dummy = 'isregisterdummy';
+                        var parent=p.parent;
+                        if (p.isdummy == "isregisterdummy") {
+                            dummy = 'isdummy';
+                            parent='';                                
+                        }
+                        if (p.isdummy == 'isdummy'){
+                            dummy = 'isdummy';
+                            parent='';
+                        }
+                            
+                        if (element % 2) {
                             luser = makeid(6, 1);
-                            ruser = makeid(6, 1);
-                            b.push({
-                                username: username,
-                                createddate: '',
-                                updateddate: '',
-                                luser: luser,
-                                ruser: ruser,
-                                level: u.level + index,
-                                isdummy: 'isregisterdummy',
-                                parent: '',
-                                gui: makeid(6, 1)
-                            });
+                            p.luser = luser;
                             b.push({
                                 username: luser,
                                 createddate: '',
                                 updateddate: '',
                                 luser: '',
                                 ruser: '',
-                                level: u.level + index + 1,
-                                isdummy: 'isdummy',
-                                parent: username,
+                                index: element,
+                                level: p.level + 1,
+                                isdummy: dummy,
+                                parent:parent,
                                 gui: makeid(6, 1)
                             });
+                        } else {
+                            ruser = makeid(6, 1);
+                            p.ruser = ruser;
                             b.push({
                                 username: ruser,
                                 createddate: '',
                                 updateddate: '',
                                 luser: '',
                                 ruser: '',
-                                level: u.level + index + 1,
-                                isdummy: 'isdummy',
-                                parent: username,
+                                index: element,
+                                level: p.level + 1,
+                                isdummy: dummy,
+                                parent: parent,
                                 gui: makeid(6, 1)
                             });
                         }
-                        // console.log('extending' + index);
-                        // console.log("b length:" + b.length);
-                        //continue;
-                    u1 = getBinaryDataByMemberLevel(u.level + index, b);
-                    if (((u.level + index + 1) > u.level + maxrange - 1)) continue;
-                    for (var i = 0; i < u1.length; i++) {
-                        var element = u1[i];
-                        if (!element.luser) {
-                            element.luser = makeid(6, 1);
-                            var isdummy = 'isdummy';
-                            if (element.isdummy == undefined)
-                                isdummy = 'isregisterdummy';
-                            b.push({
-                                username: element.luser,
-                                createddate: '',
-                                updateddate: '',
-                                luser: '',
-                                ruser: '',
-                                level: u.level + index + 1,
-                                isdummy: isdummy,
-                                parent: element.username,
-                                gui: makeid(6, 1)
-                            });
-                            updateUserBinaryByUsername(element.username, b, element)
-                        }
-                        if (!element.ruser) {
-                            element.ruser = makeid(6, 1);
-                            var isdummy = 'isdummy';
-                            if (element.isdummy == undefined)
-                                isdummy = 'isregisterdummy';
-                            b.push({
-                                username: element.ruser,
-                                createddate: '',
-                                updateddate: '',
-                                luser: '',
-                                ruser: '',
-                                level: u.level + index + 1,
-                                isdummy: isdummy,
-                                parent: element.username,
-                                gui: makeid(6, 1)
-                            });
-                            updateUserBinaryByUsername(element.username, b, element)
-                        }
-                    }
-                    console.log("end extending b length:" + b.length);
-                }
 
+                    } else {
+                        console.log('could not find parent ' + pindex + " ");
+                        return;
+                    }
+                } else {
+                    console.log('this index not belong to this parent ' + u.index);
+                    return;
+                }
             }
         }
-        return b;
     }
 
     function updateUserBinaryByUsername(username, b, user) {
@@ -738,43 +715,43 @@ ons.bootstrap()
         }
     }
 
-    function indexingJson(lusername, rusername, c, needlevel, i, parent) {
-        //console.log("1 arr length:"+arr.lenghth);
-        if (lusername) {
-            if (res = findTreeByUsername(c, lusername)) {
-                // if(needlevel<res.level)
-                //     return;                 
-                //var x=0;                                        
-                var x = (2 * i) + 1;
-                if (i == -1) x = 0; // root
-                res.index = x;
-                res.request = "lusrname:" + lusername;
-                p = findParentByUserName(lusername, c);
-                if (p && p != undefined)
-                    res.parent = p.username;
-                else res.parent = '';
-                arr[x] = res;
-                indexingJson(arr[x].luser, arr[x].ruser, c, needlevel, x, res.parent);
-            }
-        }
-        if (rusername) {
-            if (body = findTreeByUsername(c, rusername)) {
-                // if(needlevel<body.level)
-                //     return;
-                var y = (2 * i) + 2;
-                body.index = y;
-                body.request = "rusrname:" + rusername;
-                p = findParentByUserName(rusername, c);
-                if (p && p != undefined)
-                    body.parent = p.username;
-                else body.parent = '';
-                arr[y] = body;
-                //console.log(arr);
-                indexingJson(arr[y].luser, arr[y].ruser, c, needlevel, y, body.parent);
-            }
-        }
-        return;
-    }
+    // function indexingJson(lusername, rusername, c, needlevel, i, parent) {
+    //     //console.log("1 arr length:"+arr.lenghth);
+    //     if (lusername) {
+    //         if (res = findTreeByUsername(c, lusername)) {
+    //             // if(needlevel<res.level)
+    //             //     return;                 
+    //             //var x=0;                                        
+    //             var x = (2 * i) + 1;
+    //             if (i == -1) x = 0; // root
+    //             res.index = x;
+    //             res.request = "lusrname:" + lusername;
+    //             p = findParentByUserName(lusername, c);
+    //             if (p && p != undefined)
+    //                 res.parent = p.username;
+    //             else res.parent = '';
+    //             arr[x] = res;
+    //             indexingJson(arr[x].luser, arr[x].ruser, c, needlevel, x, res.parent);
+    //         }
+    //     }
+    //     if (rusername) {
+    //         if (body = findTreeByUsername(c, rusername)) {
+    //             // if(needlevel<body.level)
+    //             //     return;
+    //             var y = (2 * i) + 2;
+    //             body.index = y;
+    //             body.request = "rusrname:" + rusername;
+    //             p = findParentByUserName(rusername, c);
+    //             if (p && p != undefined)
+    //                 body.parent = p.username;
+    //             else body.parent = '';
+    //             arr[y] = body;
+    //             //console.log(arr);
+    //             indexingJson(arr[y].luser, arr[y].ruser, c, needlevel, y, body.parent);
+    //         }
+    //     }
+    //     return;
+    // }
 
     function compare(a, b) {
         var x = a.name < b.name ? -1 : 1;
@@ -865,13 +842,7 @@ ons.bootstrap()
             */
         }
     }
-    $scope.prepareBinaryData = function(username, needlevel) {
-        //  alert("ngclick");
-        if (username == '') {
-            username = 'souk@TheFriendd'
-                //return;
-        }
-        // maxrange=3;
+    $scope.prepareBinaryData = function(username, needlevel)  {
         selection.push(username);
         if (currentUsername == username)
             $("#topname").empty().text(currentUsername);
@@ -879,18 +850,19 @@ ons.bootstrap()
             $("#topname").empty().text(currentUsername + "/" + username);
         //console.log('getmember list by parent');
         getMemberListByParent(username);
-        console.log('get binary user');
-        getBinaryDataByUser(username, needlevel, function(res) {
+        //console.log('get binary user');
+        getBinaryDataByUser(username, needlevel, function (res) {
             js.client.data = {};
             js.client.data.user = {};
             js.client.data.userbinary = {};
             js.client.data.user = res.data.user;
             js.client.data.userbinary = res.data.userbinary;
             arr = [];
-            var f_userbinary = js.client.data.userbinary;
-            console.log(res);
-            f_userbinary = fillUpMembers(username, needlevel, js.client.data.userbinary);
-            indexingJson(username, '', f_userbinary, needlevel, -1, username);
+            //var f_userbinary = js.client.data.userbinary;
+            //console.log(res);
+            arr= fillUpMembers(username, needlevel, js.client.data.userbinary);
+            //indexingJson(username, '', f_userbinary, needlevel, -1, username);
+            arr.sort(compareIndex);
             arr.splice(0, 0, {}); // ignore the first item                    
             //console.log(arr.length);
             var _xarr = [];
@@ -906,18 +878,19 @@ ons.bootstrap()
                         if (u.isdummy != undefined && u.isdummy != '') {
                             //var p = findParentByUserName(u.username,arr);
                             if (u.isdummy == 'isdummy') {
-                                h =
-                                    '<div><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></div>';
+                                h ='<div><span onclick="clickme()"><img width="32px" height="32px" src="' +
+                                    getHost() + '/public/icons/forbidden-128.png" /></span></div>';
                             } else if (u.isdummy == 'isregisterdummy')
                                 h = "<div><span  onclick=register('" + u.parent +
-                                "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>";
+                                "')><img width='32px' height='32px' src='" + getHost() +
+                                "/public/icons/add-user2-512.png'/></span></div>";
                         } else {
                             h = "<div  style='border-style: unset;' ><span id='" + gui +
-                                "' ng-click=\"prepareBinaryData('" + arr[index].username + "'," + maxrange + ")\"  title='" +
+                                "' onclick=\"prepareBinaryData('" + arr[index].username + "'," + maxrange +
+                                ")\"  title='" +
                                 arr[index].username + "'>" + arr[index].username;
                             h += "</span></div>";
                         }
-
                         _xarr.push(h);
                     }
                 } else {
@@ -925,11 +898,13 @@ ons.bootstrap()
                     p = arr[index].parent;
                     if (p == '' || p == null || p == undefined)
                         _xarr.push(
-                            '<div><span onclick="clickme()"><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></span></div>'
+                            '<div><span onclick="clickme()"><img width="32px" height="32px" src="' +
+                            getHost() + '/public/icons/forbidden-128.png" /></span></div>'
                         );
                     else {
-                        _xarr.push("<div><span  ng-click=register('" + p +
-                            "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>"
+                        _xarr.push("<div><span  onclick=register('" + p +
+                            "')><img width='32px' height='32px' src='" + getHost() +
+                            "/public/icons/add-user2-512.png'/></span></div>"
                         );
                     }
                 }
@@ -939,7 +914,7 @@ ons.bootstrap()
             // console.log(_xarr.length);
             //console.log('mapping');
             var _arr = [];
-            $(function() {
+            $(function () {
                 _arr.push(_xarr[8]);
                 _arr.push(_xarr[4]);
                 _arr.push(_xarr[9]);
@@ -958,8 +933,7 @@ ons.bootstrap()
                 html = '';
                 $("#treeDiv").html('');
                 for (var index = 0; index < _arr.length; index++) {
-                    var compliehtml = $compile(_arr[index])($scope);
-                    $("#treeDiv").append(compliehtml);
+                    $("#treeDiv").append(_arr[index]);
                 }
             });
             getMoreDetails();
@@ -1006,7 +980,7 @@ ons.bootstrap()
         var b = getUserBinaryByUsername(user.username, js.client.data.userbinary);
         if (!b || b == undefined) return;
         $("#" + b.gui).empty();
-        imgurl = "";
+        var imgurl = "";
         if (user.packagename == "The Best Friend") {
             imgurl = getHost() + "/public/img/best_friend.png";
         } else if (user.packagename == "Close Friend") {
@@ -1021,52 +995,70 @@ ons.bootstrap()
         user.RCoupling = 0;
         user.leftuser = 0;
         user.rightuser = 0;
-
         $("#" + b.gui).append("<img title='" + user.username + "' width='48px' height='48px' src='" + imgurl +
             "'/>");
-        $("#" + b.gui).append("<div class='small'>" + "<div id='score" + b.gui + "'>" + user.LCoupling + "|" + user.RCoupling + "</div>" +
+        $("#" + b.gui).append("<div class='small'>" + "<div id='score" + b.gui + "'>" + user.LCoupling + "|" + user
+            .RCoupling + "</div>" +
             user.username +
-            "<div id='qtty" + b.gui + "'>" + user.leftuser + "|" + user.rightuser + "</div></div>");
+            "<div id='qtty" + b.gui + "'><l>" + user.leftuser + "</l>|<r>" + user.rightuser +
+            "</r></div></div>");
 
-        if (b.luser && b.luser != undefined) {
-            c = {};
+        if (b.luser) {
+            //user.leftuser = 1;                
+            c = {}; 
             c.data = {};
             c.data.user = {};
-            c.data.user.username = b.luser;
-            jsonPost(getHost() + '/get_member_count_by_username', c, function(res) {
+            c.data.user.username = b.luser;                
+            var x=getUserBinaryByUsername(b.luser,js.client.data.userbinary);
+            if(x==null)
+                x={};
+            if(x.isdummy!=undefined)
+                user.leftuser=0;
+            else
+            setTimeout(jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
                 user.leftuser = res.data.user.count;
-                if (user.leftuser == undefined) user.leftuser = 0;
-                var rightuser = $("#qtty" + b.gui).text().split('|')[1];
-                console.log("right user " + rightuser);
-                $("#qtty" + b.gui).empty().html((user.leftuser + 1) + "|" + rightuser);
-            });
-            jsonPost(getHost() + '/show_latest_coupling_by_user', c, function(res) {
+                //console.log(res);
+                if (user.leftuser == undefined)                    
+                    user.leftuser=1;
+                else
+                    user.leftuser++;
+                $("#qtty" + b.gui).find('l').empty().html(user.leftuser);                 
+            }),100);
+            setTimeout(jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
                 var couplingscore = res.data.couplingscore[0];
-                console.log(res);
+               // console.log(res);
                 if (res.data.message.indexOf('OK') > -1) {
                     if (res.data.couplingscore.length)
                         $("#score" + b.gui).empty().html(couplingscore.LCoupling + "|" + couplingscore.RCoupling);
                     else
                         $("#score" + b.gui).empty().html(0 + "|" + 0);
                 } else {
-                    console.log(res);
+                    //console.log(res);
                     $("#score" + b.gui).empty().html(0 + "|" + 0);
                 }
-            });
+            }),100);
         }
-        if (b.ruser && b.ruser != undefined) {
+        if (b.ruser) {
+           // user.rightuser = 1;
             c = {};
             c.data = {};
             c.data.user = {};
             c.data.user.username = b.ruser;
-            jsonPost(getHost() + '/get_member_count_by_username', c, function(res) {
+            var x=getUserBinaryByUsername(b.ruser,js.client.data.userbinary);
+            if(x==null)
+                x={};
+            if(x.isdummy!=undefined)
+                user.rightuser=0;
+            else
+            setTimeout(jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
                 user.rightuser = res.data.user.count;
-                if (user.rightuser == undefined) user.rightuser = 0;
-                var leftuser = $("#qtty" + b.gui).text().split('|')[0];
-                console.log("left user " + leftuser);
-                $("#qtty" + b.gui).empty().html(leftuser + "|" + (user.rightuser + 1));
-            });
-            jsonPost(getHost() + '/show_latest_coupling_by_user', c, function(res) {
+                if(user.rightuser==undefined)
+                    user.rightuser=1;
+                else
+                    user.rightuser++;
+                $("#qtty" + b.gui).find('r').empty().html(user.rightuser);
+            }),100);
+            setTimeout(jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
                 var couplingscore = res.data.couplingscore;
                 if (res.data.message.indexOf('OK') > -1) {
                     if (res.data.couplingscore.length)
@@ -1074,10 +1066,11 @@ ons.bootstrap()
                     else
                         $("#score" + b.gui).empty().html(0 + "|" + 0);
                 } else {
-                    console.log(res);
+                    //console.log(res);
                     $("#score" + b.gui).empty().html(0 + "|" + 0);
                 }
-            });
+                
+            }),100);
         }
     }
 
