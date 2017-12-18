@@ -937,6 +937,7 @@ ons.bootstrap()
                     html+=_arr[index];
                 }
                 $("#treeDiv").append($compile(html)($scope));
+                $scope.$apply();
             });
             getMoreDetails();
             redraw();
