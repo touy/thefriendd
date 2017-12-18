@@ -914,7 +914,6 @@ ons.bootstrap()
             // console.log(_xarr.length);
             //console.log('mapping');
             var _arr = [];
-            $(function () {
                 _arr.push(_xarr[8]);
                 _arr.push(_xarr[4]);
                 _arr.push(_xarr[9]);
@@ -938,7 +937,6 @@ ons.bootstrap()
                 }
                 $("#treeDiv").append($compile(html)($scope));
                 $scope.$apply();
-            });
             getMoreDetails();
             redraw();
         });
