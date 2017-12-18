@@ -703,6 +703,7 @@ ons.bootstrap()
                 }
             }
         }
+        return b;
     }
 
     function updateUserBinaryByUsername(username, b, user) {
