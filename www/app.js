@@ -1140,8 +1140,8 @@ ons.bootstrap()
             currentUsername = $rootScope.memberid; //TESTING ONLY
             $scope.prepareBinaryData(currentUsername, maxrange);
         });
-        currentUsername = $rootScope.memberid; //TESTING ONLY
-        $scope.prepareBinaryData(currentUsername, maxrange);
+        // currentUsername = $rootScope.memberid; //TESTING ONLY
+        // $scope.prepareBinaryData(currentUsername, maxrange);
         return;
     }
 
