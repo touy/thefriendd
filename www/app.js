@@ -714,7 +714,6 @@ ons.bootstrap()
             }
         }
     }
-
     // function indexingJson(lusername, rusername, c, needlevel, i, parent) {
     //     //console.log("1 arr length:"+arr.lenghth);
     //     if (lusername) {
