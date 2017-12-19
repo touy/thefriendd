@@ -929,13 +929,14 @@ ons.bootstrap()
                 _arr.push(_xarr[14]);
                 _arr.push(_xarr[7]);
                 _arr.push(_xarr[15]);
-                html = '';
+                var html = '';
                 $("#treeDiv").html('');
             
                 for (var index = 0; index < _arr.length; index++) {
-                    html+=_arr[index];
+                    var compliehtml = $compile(_arr[index])($scope);
+                    $("#treeDiv").append(compliehtml);
                 }
-                $("#treeDiv").append($compile(html)($scope));
+                //$("#treeDiv").append($compile(html)($scope));
                 $scope.$apply();
             getMoreDetails();
             redraw();
