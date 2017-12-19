@@ -910,9 +910,9 @@ ons.bootstrap()
                 }
             }
             // mapping
-            // console.log(arr);
+             console.log(_xarr);
             // console.log(_xarr.length);
-            //console.log('mapping');
+            console.log('mapping');
             var _arr = [];
                 _arr.push(_xarr[8]);
                 _arr.push(_xarr[4]);
