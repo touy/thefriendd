@@ -932,10 +932,11 @@ ons.bootstrap()
                 $("#treeDiv").html('');
             
                 for (var index = 0; index < _arr.length; index++) {
-                    html+=_arr[index];
+                    //html+=_arr[index];
+                    $("#treeDiv").append($compile(_arr[index])($scope));
                 }
-                $("#treeDiv").append($compile(html)($scope));
-                $scope.$apply();
+                //$("#treeDiv").append($compile(html)($scope));
+                //$scope.$apply();
             getMoreDetails();
             redraw();
         });
