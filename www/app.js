@@ -933,6 +933,7 @@ ons.bootstrap()
                 $("#treeDiv").html('');
                 console.log(_arr);
                 for (var index = 0; index < _arr.length; index++) {
+                    if(_arr[index]!=undefined)
                     html+=_arr[index];
                     //$("#treeDiv").append($compile(_arr[index])($scope));
                 }
