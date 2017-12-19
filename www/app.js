@@ -878,19 +878,18 @@ ons.bootstrap()
                         if (u.isdummy != undefined && u.isdummy != '') {
                             //var p = findParentByUserName(u.username,arr);
                             if (u.isdummy == 'isdummy') {
-                                h ='<div><span onclick="clickme()"><img width="32px" height="32px" src="' +
-                                    getHost() + '/public/icons/forbidden-128.png" /></span></div>';
+                                h =
+                                    '<div><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></div>';
                             } else if (u.isdummy == 'isregisterdummy')
                                 h = "<div><span  onclick=register('" + u.parent +
-                                "')><img width='32px' height='32px' src='" + getHost() +
-                                "/public/icons/add-user2-512.png'/></span></div>";
+                                "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>";
                         } else {
                             h = "<div  style='border-style: unset;' ><span id='" + gui +
-                                "' onclick=\"prepareBinaryData('" + arr[index].username + "'," + maxrange +
-                                ")\"  title='" +
+                                "' ng-click=\"prepareBinaryData('" + arr[index].username + "'," + maxrange + ")\"  title='" +
                                 arr[index].username + "'>" + arr[index].username;
                             h += "</span></div>";
                         }
+
                         _xarr.push(h);
                     }
                 } else {
@@ -929,14 +928,13 @@ ons.bootstrap()
                 _arr.push(_xarr[14]);
                 _arr.push(_xarr[7]);
                 _arr.push(_xarr[15]);
-                //var html = '';
+                var html = '';
                 $("#treeDiv").html('');
             
                 for (var index = 0; index < _arr.length; index++) {
-                    var compliehtml = $compile(_arr[index])($scope);
-                    $("#treeDiv").append(compliehtml);
+                    html+=_arr[index];
                 }
-                //$("#treeDiv").append($compile(html)($scope));
+                $("#treeDiv").append($compile(html)($scope));
                 $scope.$apply();
             getMoreDetails();
             redraw();
