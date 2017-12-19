@@ -880,9 +880,9 @@ ons.bootstrap()
                             //var p = findParentByUserName(u.username,arr);
                             if (u.isdummy == 'isdummy') {
                                 h =
-                                    '<div><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></div>';
+                                    '<div><span><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></span></div>';
                             } else if (u.isdummy == 'isregisterdummy')
-                                h = "<div><span  onclick=register('" + u.parent +
+                                h = "<div><span  ng-click=register('" + u.parent +
                                 "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>";
                         } else {
                             h = "<div  style='border-style: unset;' ><span id='" + gui +
@@ -898,11 +898,11 @@ ons.bootstrap()
                     p = arr[index].parent;
                     if (p == '' || p == null || p == undefined)
                         _xarr.push(
-                            '<div><span onclick="clickme()"><img width="32px" height="32px" src="' +
+                            '<div><span ><img width="32px" height="32px" src="' +
                             getHost() + '/public/icons/forbidden-128.png" /></span></div>'
                         );
                     else {
-                        _xarr.push("<div><span  onclick=register('" + p +
+                        _xarr.push("<div><span  ng-click=register('" + p +
                             "')><img width='32px' height='32px' src='" + getHost() +
                             "/public/icons/add-user2-512.png'/></span></div>"
                         );
@@ -910,9 +910,9 @@ ons.bootstrap()
                 }
             }
             // mapping
-             console.log(_xarr);
+             //console.log(_xarr);
             // console.log(_xarr.length);
-            console.log('mapping');
+            //console.log('mapping');
             var _arr = [];
                 _arr.push(_xarr[8]);
                 _arr.push(_xarr[4]);
@@ -931,7 +931,7 @@ ons.bootstrap()
                 _arr.push(_xarr[15]);
                 var html = '';
                 $("#treeDiv").html('');
-                console.log(_arr);
+                //console.log(_arr);
                 for (var index = 0; index < _arr.length; index++) {
                     if(_arr[index]!=undefined)
                     html+=_arr[index];
