@@ -874,7 +874,8 @@ ons.bootstrap()
                     u = getUserBinaryByUsername(arr[index].username, arr);
                     // console.log("dummy" + u.isdummy);
                     if (u && u != undefined) {
-                        gui = u.gui;
+                        var gui = u.gui;
+                        var h="";
                         if (u.isdummy != undefined && u.isdummy != '') {
                             //var p = findParentByUserName(u.username,arr);
                             if (u.isdummy == 'isdummy') {
