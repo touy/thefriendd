@@ -537,7 +537,7 @@ ons.bootstrap()
     function getHost() {
         // host = $(location).attr('protocol') + "//" + $(location).attr('host')+$(location).attr('pathname');
         host = "http://nonav.net:3000";
-        console.log(host)
+        //console.log(host)
         return host;
     }
 
