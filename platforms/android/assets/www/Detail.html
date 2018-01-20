@@ -1,0 +1,48 @@
+<ons-page id="mypage3" ng-controller="DetialController">
+    <!--
+  <ons-toolbar id="toolbarOver">
+    <div class="left">
+      <ons-toolbar-button ng-click="app.load('home.html')">
+        <ons-icon icon="ion-arrow-left-b"
+                  style="color:white"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+    <div class="center"
+         style="color:white">{{LangObject.Menu.ProductDetail}}</div>
+  </ons-toolbar>
+-->
+    <div class="content">
+        <div id="toolbarOver">
+            <ons-icon icon="fa-arrow-left" ng-click="app.load('home.html')" style="color:rgb(255, 255, 255); margin-top: 10px;"></ons-icon>
+        </div>
+        <!-- <img ng-click="imageModal.show();" src="{{Product.image}}" style="width:100%;height:350px;" /> -->
+        <img ng-click="app.load('Items.html')" src="{{Products.image}}" style="width:100%;height:350px;" />
+        <div style="padding : 10px">Products shipped by International sellers are delivered at no additional cost. We do urge you to ensure that the product design, warranty, return policy, etc, that may differ from local products, meets your needs and expectations. The stated price
+            includes customs fees and import duties.
+            <h4>
+                <b>{{Products.price}} LAK</b>
+            </h4>
+        </div>
+    </div>
+
+
+    <!--
+
+    <ons-modal direction="up" var="imageModal">
+        <ons-icon ng-click="imageModal.hide()" icon="ion-close-round" id="CloseOver"></ons-icon>
+        <div style="text-align: center;">
+
+
+            <img class="mySlides" src="{{ImageReal1}}" style="width:100%;" />
+            <img class="mySlides" src="{{ImageReal2}}" style="width:100%;" />
+
+
+        </div>
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+    </ons-modal>
+
+-->
+
+</ons-page>

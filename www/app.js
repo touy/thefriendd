@@ -1,17 +1,25 @@
 // Start Controll ************************************************************************************
-/*
-var del = 'true';
+
+
 ons.ready(function() {
     // Add another Onsen UI element
     //console.log("DF");
+    //window.cordova = true;
+   // window.translucentStatusbar.disable;
+  
     ons.disableDeviceBackButtonHandler();
     window.document.addEventListener('backbutton', function() {
+        var scope = angular.element(document.getElementById("b2")).scope();
+        scope.$apply(function() {
+            scope.updateCustomRequestDel('true');
+        });
         //  console.log('back');
-        del = 'false';
+      //  $rootScope.del  = 'true';
+      //  alert("DF");
     }, false);
 
 });
-*/
+
 
 ons.bootstrap()
 
@@ -155,41 +163,53 @@ ons.bootstrap()
     clearTimeout(myVar);
 
     $scope.del = 'true';
-
+    $scope.imageDefualt =  "img/Actions-bookmark-add-icon.png";
     $scope.Productitems = [{
             "title": "Mobile",
             "images": "img/Product/mobile1.jpg",
             "price": 1000000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/mobile2.jpg",
             "price": 1030000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/mobile3.jpg",
             "price": 3000000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/mobile4.jpg",
             "price": 900000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/mobile5.jpg",
             "price": 250000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/mobile6.jpg",
             "price": 3600000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
@@ -197,24 +217,32 @@ ons.bootstrap()
             "title": "Mobile",
             "images": "img/Product/comatic1.jpg",
             "price": 11500000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/comatic2.jpg",
             "price": 75000000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/comatic3.jpg",
             "price": 9880000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         },
         {
             "title": "Mobile",
             "images": "img/Product/comatic4.jpg",
             "price": 9000000,
+            "keyword" : ['mobile','computer'],
+            "status":"Active",
             "desc": "test"
         }
 
@@ -229,7 +257,9 @@ ons.bootstrap()
 
     }
 
-
+    $scope.updateCustomRequestDel = function(b) {
+        $scope.del = b;
+    }
    
 
 
@@ -258,14 +288,30 @@ ons.bootstrap()
                 //alert(JSON.stringify("Hold"));
             }
 
-        })
+        });
     }
 
 
 
     $("#file-input").change(function() {
-        readURLAdd(this);
+        //alert(this.id);
+          readURLAdd(this);
+        //  readURLEdit(this);
     });
+
+    $("#file-inputs").change(function() {
+        //alert(this.id);
+        readURLEdit(this);
+        //  readURLEdit(this);
+    });
+
+
+  
+   // inputs
+
+
+
+    
 
     $scope.uploadFile = function() {
         var file = $scope.userFile;
@@ -537,7 +583,7 @@ ons.bootstrap()
     function getHost() {
         // host = $(location).attr('protocol') + "//" + $(location).attr('host')+$(location).attr('pathname');
         host = "http://nonav.net:3000";
-        //console.log(host)
+        console.log(host)
         return host;
     }
 
@@ -613,6 +659,7 @@ ons.bootstrap()
         }
         return maxlevel;
     }
+
     function getIndexes(n, level) {
         var arr = [];
         for (var index = 1; index < level; index++) {
@@ -620,10 +667,11 @@ ons.bootstrap()
                 n = n * 2 + 1;
             for (var i = 0; i < Math.pow(2, index); i++) {
                 arr.push(2 * n + 1 + i);
-         }
+            }
         }
         return arr;
     }
+
     function fillUpMembers(username, level, b) {
         var u = getUserBinaryByUsername(username, b);
         if (!b.length) {
@@ -651,16 +699,11 @@ ons.bootstrap()
                     }
                     if (p) {
                         var dummy = 'isregisterdummy';
-                        var parent=p.parent;
                         if (p.isdummy == "isregisterdummy") {
                             dummy = 'isdummy';
-                            parent='';                                
                         }
-                        if (p.isdummy == 'isdummy'){
+                        if (p.isdummy == 'isdummy')
                             dummy = 'isdummy';
-                            parent='';
-                        }
-                            
                         if (element % 2) {
                             luser = makeid(6, 1);
                             p.luser = luser;
@@ -673,7 +716,7 @@ ons.bootstrap()
                                 index: element,
                                 level: p.level + 1,
                                 isdummy: dummy,
-                                parent:parent,
+                                parent: p.username,
                                 gui: makeid(6, 1)
                             });
                         } else {
@@ -688,7 +731,7 @@ ons.bootstrap()
                                 index: element,
                                 level: p.level + 1,
                                 isdummy: dummy,
-                                parent: parent,
+                                parent: p.username,
                                 gui: makeid(6, 1)
                             });
                         }
@@ -703,6 +746,8 @@ ons.bootstrap()
                 }
             }
         }
+
+  
         return b;
     }
 
@@ -715,43 +760,44 @@ ons.bootstrap()
             }
         }
     }
-    // function indexingJson(lusername, rusername, c, needlevel, i, parent) {
-    //     //console.log("1 arr length:"+arr.lenghth);
-    //     if (lusername) {
-    //         if (res = findTreeByUsername(c, lusername)) {
-    //             // if(needlevel<res.level)
-    //             //     return;                 
-    //             //var x=0;                                        
-    //             var x = (2 * i) + 1;
-    //             if (i == -1) x = 0; // root
-    //             res.index = x;
-    //             res.request = "lusrname:" + lusername;
-    //             p = findParentByUserName(lusername, c);
-    //             if (p && p != undefined)
-    //                 res.parent = p.username;
-    //             else res.parent = '';
-    //             arr[x] = res;
-    //             indexingJson(arr[x].luser, arr[x].ruser, c, needlevel, x, res.parent);
-    //         }
-    //     }
-    //     if (rusername) {
-    //         if (body = findTreeByUsername(c, rusername)) {
-    //             // if(needlevel<body.level)
-    //             //     return;
-    //             var y = (2 * i) + 2;
-    //             body.index = y;
-    //             body.request = "rusrname:" + rusername;
-    //             p = findParentByUserName(rusername, c);
-    //             if (p && p != undefined)
-    //                 body.parent = p.username;
-    //             else body.parent = '';
-    //             arr[y] = body;
-    //             //console.log(arr);
-    //             indexingJson(arr[y].luser, arr[y].ruser, c, needlevel, y, body.parent);
-    //         }
-    //     }
-    //     return;
-    // }
+
+    function indexingJson(lusername, rusername, c, needlevel, i, parent) {
+        //console.log("1 arr length:"+arr.lenghth);
+        if (lusername) {
+            if (res = findTreeByUsername(c, lusername)) {
+                // if(needlevel<res.level)
+                //     return;                 
+                //var x=0;                                        
+                var x = (2 * i) + 1;
+                if (i == -1) x = 0; // root
+                res.index = x;
+                res.request = "lusrname:" + lusername;
+                p = findParentByUserName(lusername, c);
+                if (p && p != undefined)
+                    res.parent = p.username;
+                else res.parent = '';
+                arr[x] = res;
+                indexingJson(arr[x].luser, arr[x].ruser, c, needlevel, x, res.parent);
+            }
+        }
+        if (rusername) {
+            if (body = findTreeByUsername(c, rusername)) {
+                // if(needlevel<body.level)
+                //     return;
+                var y = (2 * i) + 2;
+                body.index = y;
+                body.request = "rusrname:" + rusername;
+                p = findParentByUserName(rusername, c);
+                if (p && p != undefined)
+                    body.parent = p.username;
+                else body.parent = '';
+                arr[y] = body;
+                //console.log(arr);
+                indexingJson(arr[y].luser, arr[y].ruser, c, needlevel, y, body.parent);
+            }
+        }
+        return;
+    }
 
     function compare(a, b) {
         var x = a.name < b.name ? -1 : 1;
@@ -842,7 +888,13 @@ ons.bootstrap()
             */
         }
     }
-    $scope.prepareBinaryData = function(username, needlevel)  {
+    $scope.prepareBinaryData = function(username, needlevel) {
+        //  alert("ngclick");
+        if (username == '') {
+            username = 'souk@TheFriendd'
+                //return;
+        }
+        // maxrange=3;
         selection.push(username);
         if (currentUsername == username)
             $("#topname").empty().text(currentUsername);
@@ -850,19 +902,18 @@ ons.bootstrap()
             $("#topname").empty().text(currentUsername + "/" + username);
         //console.log('getmember list by parent');
         getMemberListByParent(username);
-        //console.log('get binary user');
-        getBinaryDataByUser(username, needlevel, function (res) {
+        console.log('get binary user');
+        getBinaryDataByUser(username, needlevel, function(res) {
             js.client.data = {};
             js.client.data.user = {};
             js.client.data.userbinary = {};
             js.client.data.user = res.data.user;
             js.client.data.userbinary = res.data.userbinary;
             arr = [];
-            //var f_userbinary = js.client.data.userbinary;
-            //console.log(res);
-            arr= fillUpMembers(username, needlevel, js.client.data.userbinary);
-            //indexingJson(username, '', f_userbinary, needlevel, -1, username);
-            arr.sort(compareIndex);
+            var f_userbinary = js.client.data.userbinary;
+            console.log(res);
+            f_userbinary = fillUpMembers(username, needlevel, js.client.data.userbinary);
+            indexingJson(username, '', f_userbinary, needlevel, -1, username);
             arr.splice(0, 0, {}); // ignore the first item                    
             //console.log(arr.length);
             var _xarr = [];
@@ -874,15 +925,14 @@ ons.bootstrap()
                     u = getUserBinaryByUsername(arr[index].username, arr);
                     // console.log("dummy" + u.isdummy);
                     if (u && u != undefined) {
-                        var gui = u.gui;
-                        var h="";
+                        gui = u.gui;
                         if (u.isdummy != undefined && u.isdummy != '') {
                             //var p = findParentByUserName(u.username,arr);
                             if (u.isdummy == 'isdummy') {
                                 h =
-                                    '<div><span><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></span></div>';
+                                    '<div><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></div>';
                             } else if (u.isdummy == 'isregisterdummy')
-                                h = "<div><span  ng-click=register('" + u.parent +
+                                h = "<div><span  onclick=register('" + u.parent +
                                 "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>";
                         } else {
                             h = "<div  style='border-style: unset;' ><span id='" + gui +
@@ -898,22 +948,21 @@ ons.bootstrap()
                     p = arr[index].parent;
                     if (p == '' || p == null || p == undefined)
                         _xarr.push(
-                            '<div><span ><img width="32px" height="32px" src="' +
-                            getHost() + '/public/icons/forbidden-128.png" /></span></div>'
+                            '<div><span onclick="clickme()"><img width="32px" height="32px" src="' + getHost() + '/public/icons/forbidden-128.png" /></span></div>'
                         );
                     else {
                         _xarr.push("<div><span  ng-click=register('" + p +
-                            "')><img width='32px' height='32px' src='" + getHost() +
-                            "/public/icons/add-user2-512.png'/></span></div>"
+                            "')><img width='32px' height='32px' src='" + getHost() + "/public/icons/add-user2-512.png'/></span></div>"
                         );
                     }
                 }
             }
             // mapping
-             //console.log(_xarr);
+            // console.log(arr);
             // console.log(_xarr.length);
             //console.log('mapping');
             var _arr = [];
+            $(function() {
                 _arr.push(_xarr[8]);
                 _arr.push(_xarr[4]);
                 _arr.push(_xarr[9]);
@@ -929,17 +978,13 @@ ons.bootstrap()
                 _arr.push(_xarr[14]);
                 _arr.push(_xarr[7]);
                 _arr.push(_xarr[15]);
-                var html = '';
+                html = '';
                 $("#treeDiv").html('');
-                //console.log(_arr);
                 for (var index = 0; index < _arr.length; index++) {
-                    if(_arr[index]!=undefined)
-                    html+=_arr[index];
-                    //$("#treeDiv").append($compile(_arr[index])($scope));
+                    var compliehtml = $compile(_arr[index])($scope);
+                    $("#treeDiv").append(compliehtml);
                 }
-                console.log(html);
-                $("#treeDiv").append($compile(html)($scope));
-                $scope.$apply();
+            });
             getMoreDetails();
             redraw();
         });
@@ -999,13 +1044,6 @@ ons.bootstrap()
         user.RCoupling = 0;
         user.leftuser = 0;
         user.rightuser = 0;
-        $("#" + b.gui).append("<img title='" + user.username + "' width='48px' height='48px' src='" + imgurl +
-            "'/>");
-        $("#" + b.gui).append("<div class='small'>" + "<div id='score" + b.gui + "'>" + user.LCoupling + "|" + user
-            .RCoupling + "</div>" +
-            user.username +
-            "<div id='qtty" + b.gui + "'><l>" + user.leftuser + "</l>|<r>" + user.rightuser +
-            "</r></div></div>");
 
         if (b.luser) {
             //user.leftuser = 1;                
@@ -1019,7 +1057,7 @@ ons.bootstrap()
             if(x.isdummy!=undefined)
                 user.leftuser=0;
             else
-            setTimeout(jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
+            jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
                 user.leftuser = res.data.user.count;
                 //console.log(res);
                 if (user.leftuser == undefined)                    
@@ -1027,8 +1065,8 @@ ons.bootstrap()
                 else
                     user.leftuser++;
                 $("#qtty" + b.gui).find('l').empty().html(user.leftuser);                 
-            }),100);
-            setTimeout(jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
+            });
+            jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
                 var couplingscore = res.data.couplingscore[0];
                // console.log(res);
                 if (res.data.message.indexOf('OK') > -1) {
@@ -1040,7 +1078,7 @@ ons.bootstrap()
                     //console.log(res);
                     $("#score" + b.gui).empty().html(0 + "|" + 0);
                 }
-            }),100);
+            });
         }
         if (b.ruser) {
            // user.rightuser = 1;
@@ -1054,15 +1092,15 @@ ons.bootstrap()
             if(x.isdummy!=undefined)
                 user.rightuser=0;
             else
-            setTimeout(jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
+            jsonPost(getHost() + '/get_member_count_by_username', c, function (res) {
                 user.rightuser = res.data.user.count;
                 if(user.rightuser==undefined)
                     user.rightuser=1;
                 else
                     user.rightuser++;
                 $("#qtty" + b.gui).find('r').empty().html(user.rightuser);
-            }),100);
-            setTimeout(jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
+            });
+            jsonPost(getHost() + '/show_latest_coupling_by_user', c, function (res) {
                 var couplingscore = res.data.couplingscore;
                 if (res.data.message.indexOf('OK') > -1) {
                     if (res.data.couplingscore.length)
@@ -1073,9 +1111,15 @@ ons.bootstrap()
                     //console.log(res);
                     $("#score" + b.gui).empty().html(0 + "|" + 0);
                 }
-                
-            }),100);
+            });
         }
+        $("#" + b.gui).append("<img title='" + user.username + "' width='48px' height='48px' src='" + imgurl +
+            "'/>");
+        $("#" + b.gui).append("<div class='small'>" + "<div id='score" + b.gui + "'>" + user.LCoupling + "|" + user
+            .RCoupling + "</div>" +
+            user.username +
+            "<div id='qtty" + b.gui + "'><l>" + user.leftuser + "</l>|<r>" + user.rightuser +
+            "</r></div></div>");
     }
 
 
@@ -1145,8 +1189,8 @@ ons.bootstrap()
             currentUsername = $rootScope.memberid; //TESTING ONLY
             $scope.prepareBinaryData(currentUsername, maxrange);
         });
-        // currentUsername = $rootScope.memberid; //TESTING ONLY
-        // $scope.prepareBinaryData(currentUsername, maxrange);
+        currentUsername = $rootScope.memberid; //TESTING ONLY
+        $scope.prepareBinaryData(currentUsername, maxrange);
         return;
     }
 
@@ -2009,7 +2053,8 @@ var Language = {
                     "bank": "Bank Name",
                     "email": "E-mail",
                     "idcard": "ID Card",
-                    "upload": "Upload"
+                    "upload": "Upload",
+                    "shopname": "shopname"
                 },
                 "Radio": {
                     "Cashing": "Cashing",
@@ -2075,7 +2120,8 @@ var Language = {
                     "productname": "Product Name",
                     "price": "Price",
                     "description": "Description",
-                    "image": "Image"
+                    "image": "Image",
+                    "keyword":"Keyword"
                 },
                 "TB_Promotion": {
 
@@ -2152,7 +2198,8 @@ var Language = {
                     "bank": "ຊື່ທະນາຄານ",
                     "email": "ອີເມວ",
                     "idcard": "ເລກບັດປະຈຳຕົວ",
-                    "upload": "ອັບໂຫຼດ"
+                    "upload": "ອັບໂຫຼດ",
+                    "shopname": "ຊື່ຮ້ານ"
                 },
                 "Radio": {
                     "Cashing": "ເງິນສົດ",
@@ -2219,7 +2266,8 @@ var Language = {
                     "productname": "ໍຊີ່ສີນຄ້າ",
                     "price": "ລາຄາ",
                     "description": "ລາຍລະອຽດ",
-                    "image": "ຮູບພາບ"
+                    "image": "ຮູບພາບ",
+                    "keyword":"ຄຳໃຫ້ຄົ້ນຫາ"
                 },
                 "TB_Promotion": {
 
@@ -2270,13 +2318,31 @@ function readURL(input) {
 }
 
 
+
 function readURLAdd(input) {
+
+ 
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            // $scope.up = "false";
+            $('#product').attr('src', e.target.result);
+        //    $('#productedit').attr('src', e.target.result);
+
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function readURLEdit(input) {
+
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function(e) {
             // $scope.up = "false";
-            $('#blah').attr('src', e.target.result);
+            $('#productedit').attr('src', e.target.result);
 
         }
         reader.readAsDataURL(input.files[0]);
@@ -2301,6 +2367,5 @@ function showDivs(n) {
     }
     x[slideIndexPhotos - 1].style.display = "block";
 }
-
 
 // End ***************************************************************

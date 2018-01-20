@@ -1,0 +1,16 @@
+{
+  "name": "com.phonegap.thefriend",
+  "version": "1.0.0",
+  "displayName": "TheFriendd",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "~6.3.0",
+    "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
+    "cordova-plugin-translucent-statusbar": "^1.1.1",
+    "cordova-plugin-whitelist": "^1.3.3"
+  }
+}

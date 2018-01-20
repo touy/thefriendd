@@ -1,0 +1,90 @@
+<ons-page ng-controller="HomeController" ng-init="load=='false';">
+    <ons-toolbar class="barColor">
+        <div class="left">
+            <ons-toolbar-button ng-click="app.toggle()">
+                <ons-icon icon="ion-navicon-round" style="color:white"></ons-icon>
+            </ons-toolbar-button>
+        </div>
+        <div class="center">
+            <ons-search-input placeholder="Search" style="margin-top:3px" modifier="material"></ons-search-input>
+        </div>
+
+        <div class="right">
+            <ons-toolbar-button ng-click="app.showFromObject()">
+                <ons-icon icon="fa-language" style="color:white;"></ons-icon>
+            </ons-toolbar-button>
+
+            <!--
+      <img src="img/laos.png" ng-click="changeLang('LA')" width="32px" height="32px" /> &nbsp;
+      <img src="img/united.png" ng-click="changeLang('EN')" width="32px" height="32px" />
+      -->
+        </div>
+    </ons-toolbar>
+    <!--
+    <ons-bottom-toolbar ng-if="load=='true'">
+        <span><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading ...</span>
+    </ons-bottom-toolbar>
+    <!-- onscroll="addItems()" -->
+
+    <div class="content" id="items" style="text-align: center">
+
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="{{slide[0].image}}" style="width:100%;">
+
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="{{slide[1].image}}" style="width:100%">
+
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="{{slide[2].image}}" style="width:100%">
+
+            </div>
+
+        </div>
+
+
+        <div class="center2">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+
+
+
+
+
+        <ons-gesture-detector ng-swipeleft="onGesture('Swipe Left')" ng-swiperight="onGesture('Swipe Right')" ng-swipedown="onGesture('Swipe Down')" ng-swipeup="onGesture('Up')" ng-hold="onGesture('Hold')" ng-doubletap="onGesture('Double Tap')">
+            <table width="100%">
+                <tr ng-repeat="n in items" ng-if="$index % 2 == 0">
+                    <td width="50%">
+                        <div id="boxItem">
+                            <img src="{{items[$index].images}}" ng-click="app.load('Detail.html');setImage(items[$index].images,items[$index].title,items[$index].price)" alt="Onsen UI" style="width: 100%">
+                            <div style="text-align: left"> <span style="color:rgb(255, 255, 255);background-color:rgb(10, 9, 9);padding:2px">{{items[$index].price}} LAK</span></div>
+                        </div>
+                    </td>
+                    <td ng-if="items.length-1 > $index " width="50%">
+                        <div id="boxItem">
+                            <img src="{{items[$index+1].images}}" ng-click="app.load('Detail.html');setImage(items[$index +1].images,items[$index + 1].title,items[$index +1].price)" alt="Onsen UI" style="width: 100%">
+                            <div style="text-align: left"> <span style="color:rgb(255, 255, 255);background-color:rgb(10, 9, 9);padding:2px">{{items[$index +1].price}} LAK</span></div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </ons-gesture-detector>
+
+
+    </div>
+
+
+
+</ons-page>

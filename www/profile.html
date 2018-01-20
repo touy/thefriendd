@@ -92,7 +92,7 @@
         </ons-row>
    
     
-    <div   ng-disabled="A=='0'" style="text-align: center; margin-top: 10px">
+    <div  id="items"  ng-disabled="A=='0'" style="text-align: center; margin-top: 10px">
     <ons-row style="margin-top:2%;">
       <ons-col>
       <div class="image-upload">
@@ -193,7 +193,15 @@
                    placeholder="{{LangObject.TB_ChangeProfile.idcard}}"
                    type="text"></ons-input>
       </p>
-
+      <p style="margin-top:10%;">
+        <ons-input id="#change" 
+                   float=""
+                   ng-disabled="A=='0'"
+                   modifier="material"
+                   ng-model="User.shopname"
+                   placeholder="{{LangObject.TB_ChangeProfile.shopname}}"
+                   type="text"></ons-input>
+      </p>
     
      
           <ons-input id="#change" 

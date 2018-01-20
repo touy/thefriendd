@@ -1,0 +1,98 @@
+<ons-page id="mypage"
+          ng-controller="RegisterController"
+          ng-init="User.Package='P1';">
+  <ons-toolbar class="barColor">
+    <div class="left">
+      <ons-toolbar-button ng-click="app.load('main.html')">
+        <ons-icon icon="ion-arrow-left-b"
+                  style="color:white"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+    <div class="center"
+         style="color:white">{{LangObject.Menu.Register}}</div>
+  </ons-toolbar>
+  <ons-button ng-click="dialog.show();">{{LangObject.Button.TopUp}}</ons-button>
+  <ons-dialog var="dialog">
+    <ons-row style="margin-top:20px;">
+      <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+        <ons-input class="text-input--material"
+                   float=""
+                   modifier="material"
+                   ng-model="User.Name"
+                   placeholder="{{LangObject.TB_Register.Name}}"
+                   type="text"></ons-input>
+      </ons-col>
+    </ons-row>
+    <!--
+                             <ons-row style="margin-top:20px;">                                   
+                            
+                                  <ons-col  style="text-align: center; line-height: 30px;margin-left:5px">
+                                    <ons-input  modifier="material" class="text-input==material" type="text" placeholder="{{LangObject.TB_Register.PhoneNumber}}" float ng-model="User.Tel"></ons-input>
+                                  </ons-col>
+                                 
+                            </ons-row>
+                          -->
+    <ons-row style="margin-top:20px;">
+      <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+        <ons-input class="text-input--material"
+                   float=""
+                   modifier="material"
+                   ng-model="User.Email"
+                   placeholder="{{LangObject.TB_Register.Email}}"
+                   type="text"></ons-input>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top:20px;">
+      <ons-col style="text-align: center; line-height: 30px;margin-left:5px">
+        <ons-input class="text-input--material"
+                   float=""
+                   modifier="material"
+                   ng-model="User.Code"
+                   placeholder="{{LangObject.TB_Register.Code}}"
+                   type="text"></ons-input>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-top:30px;">
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/Close_Friend.png"
+             width="50px" />
+        <br />
+        <ons-radio checked="checked"
+                   input-id="radio-1"
+                   name="group"
+                   ng-click="User.Package='P1'"></ons-radio>
+      </ons-col>
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/Friend.png"
+             width="50px" />
+        <br />
+        <ons-radio input-id="radio-2"
+                   name="group"
+                   ng-click="User.Package='P2'"></ons-radio>
+      </ons-col>
+      <ons-col style="text-align: center;">
+        <img alt=""
+             height="50px"
+             src="img/Glod_Friend.png"
+             width="50px" />
+        <br />
+        <ons-radio input-id="radio-3"
+                   name="group"
+                   ng-click="User.Package='P3'"></ons-radio>
+      </ons-col>
+    </ons-row>
+    <ons-row style="margin-bottom:20px;margin-top:20px;">
+      <ons-col style="text-align: center;">
+        <ons-button ng-click="dialog.hide()"
+                    style="background-color:red">{{LangObject.Button.Cancel}}</ons-button>
+      </ons-col>
+      <ons-col style="text-align: center;">
+        <ons-button ng-click="Topup()">{{LangObject.Button.Register}} {{User.Package}}</ons-button>
+      </ons-col>
+    </ons-row>
+  </ons-dialog>
+</ons-page>

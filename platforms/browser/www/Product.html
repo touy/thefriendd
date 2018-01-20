@@ -1,0 +1,100 @@
+<ons-page id="mypage1" ng-controller="ProductController">
+<ons-toolbar class="barColor">
+    <div class="left">
+        <ons-toolbar-button ng-click="app.load('home.html')">
+            <ons-icon icon="ion-arrow-left-b" style="color:white"></ons-icon>
+        </ons-toolbar-button>
+    </div>
+    <div class="center" style="color:white">{{LangObject.Menu.Product}}</div>
+</ons-toolbar>
+
+<ons-gesture-detector id="items" ng-swipeleft="onGesture('Swipe Left')" ng-swiperight="onGesture('Swipe Right')" ng-swipedown="onGesture('Swipe Down')" ng-swipeup="onGesture('Up')" ng-hold="onGesture('Hold')" ng-doubletap="onGesture('Double Tap')">
+    <table ng-hide="del=='false'" width="100%">
+        <tr ng-repeat="n in Productitems" ng-if="$index % 2 == 0">
+            <td width="50%">
+                <div>
+                    <img src="{{Productitems[$index].images}}" ng-click="editAction(Productitems[$index])" alt="Onsen UI" style="width: 100%">
+                    <span style="color:rgb(255, 255, 255);padding:2px">{{Productitems[$index].price}} LAK </span>
+                </div>
+            </td>
+            <td ng-if="Productitems.length-1 > $index " width="50%">
+                <div>
+                    <img src="{{Productitems[$index+1].images}}" ng-click="editAction(Productitems[$index + 1])" alt="Onsen UI" style="width: 100%">
+                    <span style="color:rgb(255, 255, 255);padding:2px">{{Productitems[$index +1].price}} LAK</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table id="b2" ng-hide="del=='true'" width="100%">
+        <tr ng-repeat="n in Productitems" ng-if="$index % 2 == 0">
+            <td width="50%">
+                <div>
+                    <img src="{{Productitems[$index].images}}" ng-click="delAction(Productitems[$index])" alt="Onsen UI" style="width: 100%">
+                    <span style="color:rgb(180, 0, 0);padding:2px">Delete</span>
+                </div>
+            </td>
+            <td ng-if="Productitems.length-1 > $index " width="50%">
+                <div>
+                    <img src="{{Productitems[$index+1].images}}" ng-click="delAction(Productitems[$index + 1])" alt="Onsen UI" style="width: 100%">
+                    <span style="color:rgb(180, 0, 0);padding:2px">Delete</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</ons-gesture-detector>
+
+
+<ons-fab position="bottom left">
+    <ons-icon icon="md-plus" ng-click="ProductModal.show()"></ons-icon>
+</ons-fab>
+
+
+
+<ons-modal direction="up" var="ProductModalEdit">
+
+    <div style="padding:10px;overflow-y: scroll; height:100%;">
+
+        <input id="texbox" type="text" name="productname" ng-model="Product.title" placeholder="{{LangObject.TB_Product.productname}}">
+
+        <input id="texbox" type="number" ng-model="Product.price" name="price" placeholder="{{LangObject.TB_Product.price}}">
+
+        <div class="image-upload_add">
+            <label for="file-input">
+                    <img id="blah" width="100%" src="{{Product.images}}"/>
+                </label>
+            <input id="file-input" type="file" file-model="userFile" />
+        </div>
+        <textarea ng-model="Product.desc" placeholder="{{LangObject.TB_Product.description}}"></textarea>
+        <br/>
+        <input type="button" ng-click="Save(Product)" class="myButton" value="{{LangObject.Button.Save}}" /> &nbsp;
+        <input type="button" ng-click="ProductModalEdit.hide()" class="myButton" value="{{LangObject.Button.Cancel}}" />
+    </div>
+
+</ons-modal>
+
+
+<ons-modal direction="up" var="ProductModal">
+
+    <div style="padding:10px;overflow-y: scroll; height:100%;">
+
+        <input id="texbox" type="text" name="productname" ng-model="ProductAdd.name" placeholder="{{LangObject.TB_Product.productname}}">
+
+        <input id="texbox" type="number" ng-model="ProductAdd.price" name="price" placeholder="{{LangObject.TB_Product.price}}">
+
+        <div class="image-upload_add">
+            <label for="file-input">
+                            <img id="blah" width="100%" src="img/add-image.png"/>
+                        </label>
+            <input id="file-input" type="file" file-model="userFile" />
+        </div>
+        <textarea ng-model="ProductAdd.desc" placeholder="{{LangObject.TB_Product.description}}"></textarea>
+        <br/>
+        <input type="button" ng-click="Save(Product)" class="myButton" value="{{LangObject.Button.Save}}" />
+        <input type="button" ng-click="ProductModal.hide()" class="myButton" value="{{LangObject.Button.Cancel}}" />
+    </div>
+
+</ons-modal>
+
+
+</ons-page>
