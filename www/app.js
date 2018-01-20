@@ -2301,4 +2301,6 @@ function showDivs(n) {
     }
     x[slideIndexPhotos - 1].style.display = "block";
 }
+
+
 // End ***************************************************************
